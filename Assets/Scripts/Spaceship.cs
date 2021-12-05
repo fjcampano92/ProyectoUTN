@@ -20,6 +20,18 @@ public class Spaceship : MonoBehaviour
     [SerializeField]
     private float strafeThrust = 50f; //velocidad con la que se mueve de derecha a izquierda
 
+    [Header("=== Boost Settings ===")]
+    [SerializeField]
+    private float maxBoostAmount = 2f;
+    [SerializeField]
+    private float boostDeprecationRate = 0.25f;
+    [SerializeField]
+    private float boostRechargeRate = 0.5f;
+    [SerializeField]
+    private float boostMultiplier = 5f;
+    public bool boosting = false;
+    public float currentBoostAmount;
+
     [SerializeField, Range(0.001f, 0.999f)]
     private float thrustGlideReduction = 0.999f;
     [SerializeField, Range(0.001f, 0.999f)]
@@ -39,11 +51,31 @@ public class Spaceship : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        currentBoostAmount = maxBoostAmount;
     }
 
     void FixedUpdate()
     {
+        HandleBoosting();
         HandleMovement();
+    }
+
+    void HandleBoosting()
+    {
+        if(boosting && currentBoostAmount > 0f)
+        {
+            currentBoostAmount -= boostDeprecationRate;
+            if (currentBoostAmount <= 0f)
+            {
+                boosting = false;
+            }
+        } else
+        {
+            if(currentBoostAmount < maxBoostAmount)
+            {
+                currentBoostAmount += boostRechargeRate;
+            }
+        }
     }
 
     void HandleMovement()
@@ -58,10 +90,19 @@ public class Spaceship : MonoBehaviour
         // Thrust
         if (thrust1D > 0.1f || thrust1D < -0.1f)
         {
-            float currentThrust = thrust;
+            float currentThrust;
+
+            if (boosting)
+            {
+                currentThrust = thrust * boostMultiplier;
+            }
+            else
+            {
+                currentThrust = thrust;
+            }
 
             rb.AddRelativeForce(Vector3.forward * thrust1D * currentThrust * Time.deltaTime);
-            leftRightGlideReduction = thrust;
+            glide = thrust;
         } else
         {
             rb.AddRelativeForce(Vector3.forward * glide * Time.deltaTime);
@@ -88,8 +129,8 @@ public class Spaceship : MonoBehaviour
             horizontalGlide = strafe1D * strafeThrust;
         } else
         {
-            rb.AddRelativeForce(Vector3.up * horizontalGlide * Time.fixedDeltaTime);
-            verticalGlide *= leftRightGlideReduction;
+            rb.AddRelativeForce(Vector3.right * horizontalGlide * Time.fixedDeltaTime);
+            horizontalGlide *= leftRightGlideReduction;
         }
     }
 
@@ -114,6 +155,11 @@ public class Spaceship : MonoBehaviour
     public void OnPitchYaw(InputAction.CallbackContext context)
     {
         pitchYaw = context.ReadValue<Vector2>();
+    }
+
+    public void OnBoost(InputAction.CallbackContext context)
+    {
+        boosting = context.performed;
     }
     #endregion
 }
