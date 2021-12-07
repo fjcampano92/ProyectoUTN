@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    private Renderer renderer;
+    private Renderer Rrenderer;
     public bool active = true;
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        Rrenderer = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -21,13 +21,13 @@ public class Target : MonoBehaviour
     private void OnMouseEnter()
     {
         if (active)
-            renderer.material.color = Color.green;
+            Rrenderer.material.color = Color.green;
         else
-            renderer.material.color = Color.red;
+            Rrenderer.material.color = Color.red;
     }
 
     private void OnMouseExit()
     {
-        renderer.material.color = Color.white;
+        Rrenderer.material.color = Color.white;
     }
 }
