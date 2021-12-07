@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfe6ab611842645b49e06620c3ffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
 --- !u!114 &315691490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfe6ab611842645b49e06620c3ffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
 --- !u!114 &631545552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfe6ab611842645b49e06620c3ffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
 --- !u!135 &649089477
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfe6ab611842645b49e06620c3ffe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
 --- !u!114 &1129897019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,7 +955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: Mercurio
   active: 1
-  sceneNumber: 1
+  sceneNumber: 2
 --- !u!114 &1936585819
 MonoBehaviour:
   m_ObjectHideFlags: 0

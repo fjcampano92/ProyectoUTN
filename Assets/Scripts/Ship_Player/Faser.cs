@@ -29,5 +29,15 @@ public class Shot : MonoBehaviour
                 Destroy(newBullet, 2);
             }
         }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        var enemigo = collision.collider.GetComponent<VidaEnemigo>();
+        if (enemigo)
+        {
+            enemigo.TakeHit(1);
+        }
     }
 }
